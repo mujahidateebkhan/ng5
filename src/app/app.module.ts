@@ -11,19 +11,28 @@ import { AboutComponent } from './about/about.component';
 
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations'
 import { DataService } from './data.service';
+import { SignUpComponent } from './sign-up/sign-up.component';
+import { UserService } from './shared/user.service';
+
+import { HttpClientModule } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
+
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    AboutComponent
+    AboutComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    HttpClientModule,
+    ToastrModule.forRoot(),
     BrowserAnimationsModule
   ],
-  providers: [DataService],
+  providers: [DataService,UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
