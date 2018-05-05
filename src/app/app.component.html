@@ -1,9 +1,10 @@
 <!--The content below is only a placeholder and can be replaced.-->
 
-<ul>
+<ul *ngIf="show">
   <li routerLink="">Home</li>
   <li routerLink="about/48">About</li>
   <li routerLink="signup">SignUp</li>
+  <li routerLink="login">Login</li>
 </ul>
 
 <router-outlet></router-outlet>

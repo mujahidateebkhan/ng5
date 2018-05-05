@@ -14,15 +14,21 @@ import { DataService } from './data.service';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { UserService } from './shared/user.service';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
+import { LoginComponent } from './login/login.component';
+import { ProfileComponent } from './profile/profile.component';
+import { AuthGuard } from './auth/auth.guard';
+import { AuthInterceptor } from './auth/auth.interceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     AboutComponent,
-    SignUpComponent
+    SignUpComponent,
+    LoginComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -30,9 +36,15 @@ import { ToastrModule } from 'ngx-toastr';
     FormsModule,
     HttpClientModule,
     ToastrModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ],
-  providers: [DataService,UserService],
+  providers: [DataService,UserService,
+    AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
